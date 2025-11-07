@@ -4,15 +4,15 @@ package file_svc.v1;
 option go_package = "github.com/vishenosik/file-svc-sdk;file_svc_v1";
 
 service FileService {
-    rpc Upload(stream FileUploadRequest) returns(FileUploadResponse);
+    rpc UploadStream(stream FileUploadStreamRequest) returns(FileUploadStreamResponse);
 }
 
-message FileUploadRequest {
+message FileUploadStreamRequest {
     string file_name = 1;
     bytes chunk = 2;
 }
   
-message FileUploadResponse {
+message FileUploadStreamResponse {
     string id = 1;
     uint32 size = 2;
 }

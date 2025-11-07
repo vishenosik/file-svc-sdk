@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type FileUploadRequest struct {
+type FileUploadStreamRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FileName      string                 `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	Chunk         []byte                 `protobuf:"bytes,2,opt,name=chunk,proto3" json:"chunk,omitempty"`
@@ -29,20 +29,20 @@ type FileUploadRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FileUploadRequest) Reset() {
-	*x = FileUploadRequest{}
+func (x *FileUploadStreamRequest) Reset() {
+	*x = FileUploadStreamRequest{}
 	mi := &file_file_svc_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FileUploadRequest) String() string {
+func (x *FileUploadStreamRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FileUploadRequest) ProtoMessage() {}
+func (*FileUploadStreamRequest) ProtoMessage() {}
 
-func (x *FileUploadRequest) ProtoReflect() protoreflect.Message {
+func (x *FileUploadStreamRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,26 +54,26 @@ func (x *FileUploadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FileUploadRequest.ProtoReflect.Descriptor instead.
-func (*FileUploadRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use FileUploadStreamRequest.ProtoReflect.Descriptor instead.
+func (*FileUploadStreamRequest) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *FileUploadRequest) GetFileName() string {
+func (x *FileUploadStreamRequest) GetFileName() string {
 	if x != nil {
 		return x.FileName
 	}
 	return ""
 }
 
-func (x *FileUploadRequest) GetChunk() []byte {
+func (x *FileUploadStreamRequest) GetChunk() []byte {
 	if x != nil {
 		return x.Chunk
 	}
 	return nil
 }
 
-type FileUploadResponse struct {
+type FileUploadStreamResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Size          uint32                 `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
@@ -81,20 +81,20 @@ type FileUploadResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FileUploadResponse) Reset() {
-	*x = FileUploadResponse{}
+func (x *FileUploadStreamResponse) Reset() {
+	*x = FileUploadStreamResponse{}
 	mi := &file_file_svc_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FileUploadResponse) String() string {
+func (x *FileUploadStreamResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FileUploadResponse) ProtoMessage() {}
+func (*FileUploadStreamResponse) ProtoMessage() {}
 
-func (x *FileUploadResponse) ProtoReflect() protoreflect.Message {
+func (x *FileUploadStreamResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -106,19 +106,19 @@ func (x *FileUploadResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FileUploadResponse.ProtoReflect.Descriptor instead.
-func (*FileUploadResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use FileUploadStreamResponse.ProtoReflect.Descriptor instead.
+func (*FileUploadStreamResponse) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *FileUploadResponse) GetId() string {
+func (x *FileUploadStreamResponse) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *FileUploadResponse) GetSize() uint32 {
+func (x *FileUploadStreamResponse) GetSize() uint32 {
 	if x != nil {
 		return x.Size
 	}
@@ -129,15 +129,15 @@ var File_file_svc_proto protoreflect.FileDescriptor
 
 const file_file_svc_proto_rawDesc = "" +
 	"\n" +
-	"\x0efile_svc.proto\x12\vfile_svc.v1\"F\n" +
-	"\x11FileUploadRequest\x12\x1b\n" +
+	"\x0efile_svc.proto\x12\vfile_svc.v1\"L\n" +
+	"\x17FileUploadStreamRequest\x12\x1b\n" +
 	"\tfile_name\x18\x01 \x01(\tR\bfileName\x12\x14\n" +
-	"\x05chunk\x18\x02 \x01(\fR\x05chunk\"8\n" +
-	"\x12FileUploadResponse\x12\x0e\n" +
+	"\x05chunk\x18\x02 \x01(\fR\x05chunk\">\n" +
+	"\x18FileUploadStreamResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04size\x18\x02 \x01(\rR\x04size2Z\n" +
-	"\vFileService\x12K\n" +
-	"\x06Upload\x12\x1e.file_svc.v1.FileUploadRequest\x1a\x1f.file_svc.v1.FileUploadResponse(\x01B0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
+	"\x04size\x18\x02 \x01(\rR\x04size2l\n" +
+	"\vFileService\x12]\n" +
+	"\fUploadStream\x12$.file_svc.v1.FileUploadStreamRequest\x1a%.file_svc.v1.FileUploadStreamResponse(\x01B0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
 
 var (
 	file_file_svc_proto_rawDescOnce sync.Once
@@ -153,12 +153,12 @@ func file_file_svc_proto_rawDescGZIP() []byte {
 
 var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_file_svc_proto_goTypes = []any{
-	(*FileUploadRequest)(nil),  // 0: file_svc.v1.FileUploadRequest
-	(*FileUploadResponse)(nil), // 1: file_svc.v1.FileUploadResponse
+	(*FileUploadStreamRequest)(nil),  // 0: file_svc.v1.FileUploadStreamRequest
+	(*FileUploadStreamResponse)(nil), // 1: file_svc.v1.FileUploadStreamResponse
 }
 var file_file_svc_proto_depIdxs = []int32{
-	0, // 0: file_svc.v1.FileService.Upload:input_type -> file_svc.v1.FileUploadRequest
-	1, // 1: file_svc.v1.FileService.Upload:output_type -> file_svc.v1.FileUploadResponse
+	0, // 0: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.FileUploadStreamRequest
+	1, // 1: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.FileUploadStreamResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

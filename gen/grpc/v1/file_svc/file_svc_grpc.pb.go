@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FileService_Upload_FullMethodName = "/file_svc.v1.FileService/Upload"
+	FileService_UploadStream_FullMethodName = "/file_svc.v1.FileService/UploadStream"
 )
 
 // FileServiceClient is the client API for FileService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FileServiceClient interface {
-	Upload(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[FileUploadRequest, FileUploadResponse], error)
+	UploadStream(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[FileUploadStreamRequest, FileUploadStreamResponse], error)
 }
 
 type fileServiceClient struct {
@@ -37,24 +37,24 @@ func NewFileServiceClient(cc grpc.ClientConnInterface) FileServiceClient {
 	return &fileServiceClient{cc}
 }
 
-func (c *fileServiceClient) Upload(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[FileUploadRequest, FileUploadResponse], error) {
+func (c *fileServiceClient) UploadStream(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[FileUploadStreamRequest, FileUploadStreamResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &FileService_ServiceDesc.Streams[0], FileService_Upload_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &FileService_ServiceDesc.Streams[0], FileService_UploadStream_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[FileUploadRequest, FileUploadResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[FileUploadStreamRequest, FileUploadStreamResponse]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type FileService_UploadClient = grpc.ClientStreamingClient[FileUploadRequest, FileUploadResponse]
+type FileService_UploadStreamClient = grpc.ClientStreamingClient[FileUploadStreamRequest, FileUploadStreamResponse]
 
 // FileServiceServer is the server API for FileService service.
 // All implementations must embed UnimplementedFileServiceServer
 // for forward compatibility.
 type FileServiceServer interface {
-	Upload(grpc.ClientStreamingServer[FileUploadRequest, FileUploadResponse]) error
+	UploadStream(grpc.ClientStreamingServer[FileUploadStreamRequest, FileUploadStreamResponse]) error
 	mustEmbedUnimplementedFileServiceServer()
 }
 
@@ -65,8 +65,8 @@ type FileServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedFileServiceServer struct{}
 
-func (UnimplementedFileServiceServer) Upload(grpc.ClientStreamingServer[FileUploadRequest, FileUploadResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method Upload not implemented")
+func (UnimplementedFileServiceServer) UploadStream(grpc.ClientStreamingServer[FileUploadStreamRequest, FileUploadStreamResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method UploadStream not implemented")
 }
 func (UnimplementedFileServiceServer) mustEmbedUnimplementedFileServiceServer() {}
 func (UnimplementedFileServiceServer) testEmbeddedByValue()                     {}
@@ -89,12 +89,12 @@ func RegisterFileServiceServer(s grpc.ServiceRegistrar, srv FileServiceServer) {
 	s.RegisterService(&FileService_ServiceDesc, srv)
 }
 
-func _FileService_Upload_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(FileServiceServer).Upload(&grpc.GenericServerStream[FileUploadRequest, FileUploadResponse]{ServerStream: stream})
+func _FileService_UploadStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(FileServiceServer).UploadStream(&grpc.GenericServerStream[FileUploadStreamRequest, FileUploadStreamResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type FileService_UploadServer = grpc.ClientStreamingServer[FileUploadRequest, FileUploadResponse]
+type FileService_UploadStreamServer = grpc.ClientStreamingServer[FileUploadStreamRequest, FileUploadStreamResponse]
 
 // FileService_ServiceDesc is the grpc.ServiceDesc for FileService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -105,8 +105,8 @@ var FileService_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "Upload",
-			Handler:       _FileService_Upload_Handler,
+			StreamName:    "UploadStream",
+			Handler:       _FileService_UploadStream_Handler,
 			ClientStreams: true,
 		},
 	},
