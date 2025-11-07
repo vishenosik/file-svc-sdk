@@ -1,0 +1,9 @@
+version: "3"
+
+tasks:
+    
+  go-generate-grpc-api:
+    desc: Generate golang gRPC client/server from proto files
+    aliases: [go-gen-grpc]
+    silent: true
+    cmd: ./scripts/generate.go.sh ./gen/grpc ./protos
