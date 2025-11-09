@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	FileService_Constraints_FullMethodName  = "/file_svc.v1.FileService/Constraints"
 	FileService_UploadStream_FullMethodName = "/file_svc.v1.FileService/UploadStream"
 )
 
@@ -26,6 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FileServiceClient interface {
+	Constraints(ctx context.Context, in *ConstraintsRequest, opts ...grpc.CallOption) (*ConstraintsResponse, error)
 	UploadStream(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[FileUploadStreamRequest, FileUploadStreamResponse], error)
 }
 
@@ -35,6 +37,16 @@ type fileServiceClient struct {
 
 func NewFileServiceClient(cc grpc.ClientConnInterface) FileServiceClient {
 	return &fileServiceClient{cc}
+}
+
+func (c *fileServiceClient) Constraints(ctx context.Context, in *ConstraintsRequest, opts ...grpc.CallOption) (*ConstraintsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConstraintsResponse)
+	err := c.cc.Invoke(ctx, FileService_Constraints_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *fileServiceClient) UploadStream(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[FileUploadStreamRequest, FileUploadStreamResponse], error) {
@@ -54,6 +66,7 @@ type FileService_UploadStreamClient = grpc.ClientStreamingClient[FileUploadStrea
 // All implementations must embed UnimplementedFileServiceServer
 // for forward compatibility.
 type FileServiceServer interface {
+	Constraints(context.Context, *ConstraintsRequest) (*ConstraintsResponse, error)
 	UploadStream(grpc.ClientStreamingServer[FileUploadStreamRequest, FileUploadStreamResponse]) error
 	mustEmbedUnimplementedFileServiceServer()
 }
@@ -65,6 +78,9 @@ type FileServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedFileServiceServer struct{}
 
+func (UnimplementedFileServiceServer) Constraints(context.Context, *ConstraintsRequest) (*ConstraintsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Constraints not implemented")
+}
 func (UnimplementedFileServiceServer) UploadStream(grpc.ClientStreamingServer[FileUploadStreamRequest, FileUploadStreamResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method UploadStream not implemented")
 }
@@ -89,6 +105,24 @@ func RegisterFileServiceServer(s grpc.ServiceRegistrar, srv FileServiceServer) {
 	s.RegisterService(&FileService_ServiceDesc, srv)
 }
 
+func _FileService_Constraints_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConstraintsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServiceServer).Constraints(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileService_Constraints_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServiceServer).Constraints(ctx, req.(*ConstraintsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FileService_UploadStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	return srv.(FileServiceServer).UploadStream(&grpc.GenericServerStream[FileUploadStreamRequest, FileUploadStreamResponse]{ServerStream: stream})
 }
@@ -102,7 +136,12 @@ type FileService_UploadStreamServer = grpc.ClientStreamingServer[FileUploadStrea
 var FileService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "file_svc.v1.FileService",
 	HandlerType: (*FileServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Constraints",
+			Handler:    _FileService_Constraints_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UploadStream",

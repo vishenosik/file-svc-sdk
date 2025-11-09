@@ -21,6 +21,94 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ConstraintsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConstraintsRequest) Reset() {
+	*x = ConstraintsRequest{}
+	mi := &file_file_svc_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConstraintsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConstraintsRequest) ProtoMessage() {}
+
+func (x *ConstraintsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConstraintsRequest.ProtoReflect.Descriptor instead.
+func (*ConstraintsRequest) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{0}
+}
+
+type ConstraintsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MaxBatchSize  uint32                 `protobuf:"varint,1,opt,name=max_batch_size,json=maxBatchSize,proto3" json:"max_batch_size,omitempty"`
+	MaxFileSize   uint32                 `protobuf:"varint,2,opt,name=max_file_size,json=maxFileSize,proto3" json:"max_file_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConstraintsResponse) Reset() {
+	*x = ConstraintsResponse{}
+	mi := &file_file_svc_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConstraintsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConstraintsResponse) ProtoMessage() {}
+
+func (x *ConstraintsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConstraintsResponse.ProtoReflect.Descriptor instead.
+func (*ConstraintsResponse) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ConstraintsResponse) GetMaxBatchSize() uint32 {
+	if x != nil {
+		return x.MaxBatchSize
+	}
+	return 0
+}
+
+func (x *ConstraintsResponse) GetMaxFileSize() uint32 {
+	if x != nil {
+		return x.MaxFileSize
+	}
+	return 0
+}
+
 type FileUploadStreamRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FileName      string                 `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
@@ -31,7 +119,7 @@ type FileUploadStreamRequest struct {
 
 func (x *FileUploadStreamRequest) Reset() {
 	*x = FileUploadStreamRequest{}
-	mi := &file_file_svc_proto_msgTypes[0]
+	mi := &file_file_svc_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +131,7 @@ func (x *FileUploadStreamRequest) String() string {
 func (*FileUploadStreamRequest) ProtoMessage() {}
 
 func (x *FileUploadStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_file_svc_proto_msgTypes[0]
+	mi := &file_file_svc_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +144,7 @@ func (x *FileUploadStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileUploadStreamRequest.ProtoReflect.Descriptor instead.
 func (*FileUploadStreamRequest) Descriptor() ([]byte, []int) {
-	return file_file_svc_proto_rawDescGZIP(), []int{0}
+	return file_file_svc_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *FileUploadStreamRequest) GetFileName() string {
@@ -83,7 +171,7 @@ type FileUploadStreamResponse struct {
 
 func (x *FileUploadStreamResponse) Reset() {
 	*x = FileUploadStreamResponse{}
-	mi := &file_file_svc_proto_msgTypes[1]
+	mi := &file_file_svc_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +183,7 @@ func (x *FileUploadStreamResponse) String() string {
 func (*FileUploadStreamResponse) ProtoMessage() {}
 
 func (x *FileUploadStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_file_svc_proto_msgTypes[1]
+	mi := &file_file_svc_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +196,7 @@ func (x *FileUploadStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileUploadStreamResponse.ProtoReflect.Descriptor instead.
 func (*FileUploadStreamResponse) Descriptor() ([]byte, []int) {
-	return file_file_svc_proto_rawDescGZIP(), []int{1}
+	return file_file_svc_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *FileUploadStreamResponse) GetId() string {
@@ -129,14 +217,19 @@ var File_file_svc_proto protoreflect.FileDescriptor
 
 const file_file_svc_proto_rawDesc = "" +
 	"\n" +
-	"\x0efile_svc.proto\x12\vfile_svc.v1\"L\n" +
+	"\x0efile_svc.proto\x12\vfile_svc.v1\"\x14\n" +
+	"\x12ConstraintsRequest\"_\n" +
+	"\x13ConstraintsResponse\x12$\n" +
+	"\x0emax_batch_size\x18\x01 \x01(\rR\fmaxBatchSize\x12\"\n" +
+	"\rmax_file_size\x18\x02 \x01(\rR\vmaxFileSize\"L\n" +
 	"\x17FileUploadStreamRequest\x12\x1b\n" +
 	"\tfile_name\x18\x01 \x01(\tR\bfileName\x12\x14\n" +
 	"\x05chunk\x18\x02 \x01(\fR\x05chunk\">\n" +
 	"\x18FileUploadStreamResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04size\x18\x02 \x01(\rR\x04size2l\n" +
-	"\vFileService\x12]\n" +
+	"\x04size\x18\x02 \x01(\rR\x04size2\xbe\x01\n" +
+	"\vFileService\x12P\n" +
+	"\vConstraints\x12\x1f.file_svc.v1.ConstraintsRequest\x1a .file_svc.v1.ConstraintsResponse\x12]\n" +
 	"\fUploadStream\x12$.file_svc.v1.FileUploadStreamRequest\x1a%.file_svc.v1.FileUploadStreamResponse(\x01B0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
 
 var (
@@ -151,16 +244,20 @@ func file_file_svc_proto_rawDescGZIP() []byte {
 	return file_file_svc_proto_rawDescData
 }
 
-var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_file_svc_proto_goTypes = []any{
-	(*FileUploadStreamRequest)(nil),  // 0: file_svc.v1.FileUploadStreamRequest
-	(*FileUploadStreamResponse)(nil), // 1: file_svc.v1.FileUploadStreamResponse
+	(*ConstraintsRequest)(nil),       // 0: file_svc.v1.ConstraintsRequest
+	(*ConstraintsResponse)(nil),      // 1: file_svc.v1.ConstraintsResponse
+	(*FileUploadStreamRequest)(nil),  // 2: file_svc.v1.FileUploadStreamRequest
+	(*FileUploadStreamResponse)(nil), // 3: file_svc.v1.FileUploadStreamResponse
 }
 var file_file_svc_proto_depIdxs = []int32{
-	0, // 0: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.FileUploadStreamRequest
-	1, // 1: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.FileUploadStreamResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 0: file_svc.v1.FileService.Constraints:input_type -> file_svc.v1.ConstraintsRequest
+	2, // 1: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.FileUploadStreamRequest
+	1, // 2: file_svc.v1.FileService.Constraints:output_type -> file_svc.v1.ConstraintsResponse
+	3, // 3: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.FileUploadStreamResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -177,7 +274,7 @@ func file_file_svc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_file_svc_proto_rawDesc), len(file_file_svc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
