@@ -58,10 +58,6 @@ func NewFileServiceClient(config FileServiceConfig) (*FileServiceClient, error) 
 		return nil, err
 	}
 
-	if err := cli.constraints(); err != nil {
-		return nil, err
-	}
-
 	return cli, nil
 }
 
@@ -94,7 +90,7 @@ func (cli *FileServiceClient) connect() error {
 }
 
 func (cli *FileServiceClient) constraints() error {
-	resp, err := cli.client.Constraints(context.TODO(), &file_svc_v1.ConstraintsRequest{})
+	resp, err := cli.client.Constraints(context.TODO(), &file_svc_v1.ConstraintsReq{})
 	if err != nil {
 		return err
 	}

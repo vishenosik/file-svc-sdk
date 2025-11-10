@@ -21,26 +21,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ConstraintsRequest struct {
+type ConstraintsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ConstraintsRequest) Reset() {
-	*x = ConstraintsRequest{}
+func (x *ConstraintsReq) Reset() {
+	*x = ConstraintsReq{}
 	mi := &file_file_svc_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ConstraintsRequest) String() string {
+func (x *ConstraintsReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ConstraintsRequest) ProtoMessage() {}
+func (*ConstraintsReq) ProtoMessage() {}
 
-func (x *ConstraintsRequest) ProtoReflect() protoreflect.Message {
+func (x *ConstraintsReq) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -52,12 +52,12 @@ func (x *ConstraintsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ConstraintsRequest.ProtoReflect.Descriptor instead.
-func (*ConstraintsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ConstraintsReq.ProtoReflect.Descriptor instead.
+func (*ConstraintsReq) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{0}
 }
 
-type ConstraintsResponse struct {
+type ConstraintsResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MaxBatchSize  uint32                 `protobuf:"varint,1,opt,name=max_batch_size,json=maxBatchSize,proto3" json:"max_batch_size,omitempty"`
 	MaxFileSize   uint32                 `protobuf:"varint,2,opt,name=max_file_size,json=maxFileSize,proto3" json:"max_file_size,omitempty"`
@@ -65,20 +65,20 @@ type ConstraintsResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ConstraintsResponse) Reset() {
-	*x = ConstraintsResponse{}
+func (x *ConstraintsResp) Reset() {
+	*x = ConstraintsResp{}
 	mi := &file_file_svc_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ConstraintsResponse) String() string {
+func (x *ConstraintsResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ConstraintsResponse) ProtoMessage() {}
+func (*ConstraintsResp) ProtoMessage() {}
 
-func (x *ConstraintsResponse) ProtoReflect() protoreflect.Message {
+func (x *ConstraintsResp) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -90,47 +90,46 @@ func (x *ConstraintsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ConstraintsResponse.ProtoReflect.Descriptor instead.
-func (*ConstraintsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ConstraintsResp.ProtoReflect.Descriptor instead.
+func (*ConstraintsResp) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ConstraintsResponse) GetMaxBatchSize() uint32 {
+func (x *ConstraintsResp) GetMaxBatchSize() uint32 {
 	if x != nil {
 		return x.MaxBatchSize
 	}
 	return 0
 }
 
-func (x *ConstraintsResponse) GetMaxFileSize() uint32 {
+func (x *ConstraintsResp) GetMaxFileSize() uint32 {
 	if x != nil {
 		return x.MaxFileSize
 	}
 	return 0
 }
 
-type FileUploadStreamRequest struct {
+type UploadStreamMsg struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FileName      string                 `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	Chunk         []byte                 `protobuf:"bytes,2,opt,name=chunk,proto3" json:"chunk,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FileUploadStreamRequest) Reset() {
-	*x = FileUploadStreamRequest{}
+func (x *UploadStreamMsg) Reset() {
+	*x = UploadStreamMsg{}
 	mi := &file_file_svc_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FileUploadStreamRequest) String() string {
+func (x *UploadStreamMsg) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FileUploadStreamRequest) ProtoMessage() {}
+func (*UploadStreamMsg) ProtoMessage() {}
 
-func (x *FileUploadStreamRequest) ProtoReflect() protoreflect.Message {
+func (x *UploadStreamMsg) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -142,26 +141,19 @@ func (x *FileUploadStreamRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FileUploadStreamRequest.ProtoReflect.Descriptor instead.
-func (*FileUploadStreamRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadStreamMsg.ProtoReflect.Descriptor instead.
+func (*UploadStreamMsg) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *FileUploadStreamRequest) GetFileName() string {
-	if x != nil {
-		return x.FileName
-	}
-	return ""
-}
-
-func (x *FileUploadStreamRequest) GetChunk() []byte {
+func (x *UploadStreamMsg) GetChunk() []byte {
 	if x != nil {
 		return x.Chunk
 	}
 	return nil
 }
 
-type FileUploadStreamResponse struct {
+type UploadStreamResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Size          uint32                 `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
@@ -169,20 +161,20 @@ type FileUploadStreamResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FileUploadStreamResponse) Reset() {
-	*x = FileUploadStreamResponse{}
+func (x *UploadStreamResp) Reset() {
+	*x = UploadStreamResp{}
 	mi := &file_file_svc_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FileUploadStreamResponse) String() string {
+func (x *UploadStreamResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FileUploadStreamResponse) ProtoMessage() {}
+func (*UploadStreamResp) ProtoMessage() {}
 
-func (x *FileUploadStreamResponse) ProtoReflect() protoreflect.Message {
+func (x *UploadStreamResp) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -194,43 +186,135 @@ func (x *FileUploadStreamResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FileUploadStreamResponse.ProtoReflect.Descriptor instead.
-func (*FileUploadStreamResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadStreamResp.ProtoReflect.Descriptor instead.
+func (*UploadStreamResp) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *FileUploadStreamResponse) GetId() string {
+func (x *UploadStreamResp) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *FileUploadStreamResponse) GetSize() uint32 {
+func (x *UploadStreamResp) GetSize() uint32 {
 	if x != nil {
 		return x.Size
 	}
 	return 0
 }
 
+type DownloadStreamReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DownloadStreamReq) Reset() {
+	*x = DownloadStreamReq{}
+	mi := &file_file_svc_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DownloadStreamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DownloadStreamReq) ProtoMessage() {}
+
+func (x *DownloadStreamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DownloadStreamReq.ProtoReflect.Descriptor instead.
+func (*DownloadStreamReq) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DownloadStreamReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type DownloadStreamMsg struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Chunk         []byte                 `protobuf:"bytes,1,opt,name=chunk,proto3" json:"chunk,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DownloadStreamMsg) Reset() {
+	*x = DownloadStreamMsg{}
+	mi := &file_file_svc_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DownloadStreamMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DownloadStreamMsg) ProtoMessage() {}
+
+func (x *DownloadStreamMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DownloadStreamMsg.ProtoReflect.Descriptor instead.
+func (*DownloadStreamMsg) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DownloadStreamMsg) GetChunk() []byte {
+	if x != nil {
+		return x.Chunk
+	}
+	return nil
+}
+
 var File_file_svc_proto protoreflect.FileDescriptor
 
 const file_file_svc_proto_rawDesc = "" +
 	"\n" +
-	"\x0efile_svc.proto\x12\vfile_svc.v1\"\x14\n" +
-	"\x12ConstraintsRequest\"_\n" +
-	"\x13ConstraintsResponse\x12$\n" +
+	"\x0efile_svc.proto\x12\vfile_svc.v1\"\x10\n" +
+	"\x0eConstraintsReq\"[\n" +
+	"\x0fConstraintsResp\x12$\n" +
 	"\x0emax_batch_size\x18\x01 \x01(\rR\fmaxBatchSize\x12\"\n" +
-	"\rmax_file_size\x18\x02 \x01(\rR\vmaxFileSize\"L\n" +
-	"\x17FileUploadStreamRequest\x12\x1b\n" +
-	"\tfile_name\x18\x01 \x01(\tR\bfileName\x12\x14\n" +
-	"\x05chunk\x18\x02 \x01(\fR\x05chunk\">\n" +
-	"\x18FileUploadStreamResponse\x12\x0e\n" +
+	"\rmax_file_size\x18\x02 \x01(\rR\vmaxFileSize\"'\n" +
+	"\x0fUploadStreamMsg\x12\x14\n" +
+	"\x05chunk\x18\x02 \x01(\fR\x05chunk\"6\n" +
+	"\x10UploadStreamResp\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04size\x18\x02 \x01(\rR\x04size2\xbe\x01\n" +
-	"\vFileService\x12P\n" +
-	"\vConstraints\x12\x1f.file_svc.v1.ConstraintsRequest\x1a .file_svc.v1.ConstraintsResponse\x12]\n" +
-	"\fUploadStream\x12$.file_svc.v1.FileUploadStreamRequest\x1a%.file_svc.v1.FileUploadStreamResponse(\x01B0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
+	"\x04size\x18\x02 \x01(\rR\x04size\"#\n" +
+	"\x11DownloadStreamReq\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\")\n" +
+	"\x11DownloadStreamMsg\x12\x14\n" +
+	"\x05chunk\x18\x01 \x01(\fR\x05chunk2\xfa\x01\n" +
+	"\vFileService\x12H\n" +
+	"\vConstraints\x12\x1b.file_svc.v1.ConstraintsReq\x1a\x1c.file_svc.v1.ConstraintsResp\x12M\n" +
+	"\fUploadStream\x12\x1c.file_svc.v1.UploadStreamMsg\x1a\x1d.file_svc.v1.UploadStreamResp(\x01\x12R\n" +
+	"\x0eDownloadStream\x12\x1e.file_svc.v1.DownloadStreamReq\x1a\x1e.file_svc.v1.DownloadStreamMsg0\x01B0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
 
 var (
 	file_file_svc_proto_rawDescOnce sync.Once
@@ -244,20 +328,24 @@ func file_file_svc_proto_rawDescGZIP() []byte {
 	return file_file_svc_proto_rawDescData
 }
 
-var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_file_svc_proto_goTypes = []any{
-	(*ConstraintsRequest)(nil),       // 0: file_svc.v1.ConstraintsRequest
-	(*ConstraintsResponse)(nil),      // 1: file_svc.v1.ConstraintsResponse
-	(*FileUploadStreamRequest)(nil),  // 2: file_svc.v1.FileUploadStreamRequest
-	(*FileUploadStreamResponse)(nil), // 3: file_svc.v1.FileUploadStreamResponse
+	(*ConstraintsReq)(nil),    // 0: file_svc.v1.ConstraintsReq
+	(*ConstraintsResp)(nil),   // 1: file_svc.v1.ConstraintsResp
+	(*UploadStreamMsg)(nil),   // 2: file_svc.v1.UploadStreamMsg
+	(*UploadStreamResp)(nil),  // 3: file_svc.v1.UploadStreamResp
+	(*DownloadStreamReq)(nil), // 4: file_svc.v1.DownloadStreamReq
+	(*DownloadStreamMsg)(nil), // 5: file_svc.v1.DownloadStreamMsg
 }
 var file_file_svc_proto_depIdxs = []int32{
-	0, // 0: file_svc.v1.FileService.Constraints:input_type -> file_svc.v1.ConstraintsRequest
-	2, // 1: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.FileUploadStreamRequest
-	1, // 2: file_svc.v1.FileService.Constraints:output_type -> file_svc.v1.ConstraintsResponse
-	3, // 3: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.FileUploadStreamResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 0: file_svc.v1.FileService.Constraints:input_type -> file_svc.v1.ConstraintsReq
+	2, // 1: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.UploadStreamMsg
+	4, // 2: file_svc.v1.FileService.DownloadStream:input_type -> file_svc.v1.DownloadStreamReq
+	1, // 3: file_svc.v1.FileService.Constraints:output_type -> file_svc.v1.ConstraintsResp
+	3, // 4: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.UploadStreamResp
+	5, // 5: file_svc.v1.FileService.DownloadStream:output_type -> file_svc.v1.DownloadStreamMsg
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -274,7 +362,7 @@ func file_file_svc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_file_svc_proto_rawDesc), len(file_file_svc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

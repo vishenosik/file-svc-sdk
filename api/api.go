@@ -8,8 +8,13 @@ import (
 	"google.golang.org/grpc"
 )
 
+const (
+	FilenameHeader = "filename"
+)
+
 type FileService interface {
 	Upload(filename string, file []byte) (id string, err error)
+	Download(id string) (file []byte, err error)
 	GetBatchSize() uint32
 	GetMaxFileSize() uint32
 }

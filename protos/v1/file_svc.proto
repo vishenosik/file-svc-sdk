@@ -4,23 +4,31 @@ package file_svc.v1;
 option go_package = "github.com/vishenosik/file-svc-sdk;file_svc_v1";
 
 service FileService {
-    rpc Constraints(ConstraintsRequest) returns(ConstraintsResponse);
-    rpc UploadStream(stream FileUploadStreamRequest) returns(FileUploadStreamResponse);
+    rpc Constraints(ConstraintsReq) returns(ConstraintsResp);
+    rpc UploadStream(stream UploadStreamMsg) returns(UploadStreamResp);
+    rpc DownloadStream(DownloadStreamReq) returns(stream DownloadStreamMsg);
 }
 
-message ConstraintsRequest {}
+message ConstraintsReq {}
 
-message ConstraintsResponse {
+message ConstraintsResp {
     uint32 max_batch_size = 1;
     uint32 max_file_size = 2;
 }
 
-message FileUploadStreamRequest {
-    string file_name = 1;
+message UploadStreamMsg {
     bytes chunk = 2;
 }
   
-message FileUploadStreamResponse {
+message UploadStreamResp {
     string id = 1;
     uint32 size = 2;
+}
+
+message DownloadStreamReq {
+    string id = 1;
+}
+
+message DownloadStreamMsg {
+    bytes chunk = 1;
 }
