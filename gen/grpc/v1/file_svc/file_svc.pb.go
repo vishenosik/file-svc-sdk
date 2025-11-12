@@ -205,27 +205,27 @@ func (x *UploadStreamResp) GetSize() uint32 {
 	return 0
 }
 
-type DownloadStreamReq struct {
+type FileReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DownloadStreamReq) Reset() {
-	*x = DownloadStreamReq{}
+func (x *FileReq) Reset() {
+	*x = FileReq{}
 	mi := &file_file_svc_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DownloadStreamReq) String() string {
+func (x *FileReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DownloadStreamReq) ProtoMessage() {}
+func (*FileReq) ProtoMessage() {}
 
-func (x *DownloadStreamReq) ProtoReflect() protoreflect.Message {
+func (x *FileReq) ProtoReflect() protoreflect.Message {
 	mi := &file_file_svc_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -237,12 +237,12 @@ func (x *DownloadStreamReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DownloadStreamReq.ProtoReflect.Descriptor instead.
-func (*DownloadStreamReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use FileReq.ProtoReflect.Descriptor instead.
+func (*FileReq) Descriptor() ([]byte, []int) {
 	return file_file_svc_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DownloadStreamReq) GetId() string {
+func (x *FileReq) GetId() string {
 	if x != nil {
 		return x.Id
 	}
@@ -293,6 +293,190 @@ func (x *DownloadStreamMsg) GetChunk() []byte {
 	return nil
 }
 
+type DeleteFileResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteFileResp) Reset() {
+	*x = DeleteFileResp{}
+	mi := &file_file_svc_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteFileResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteFileResp) ProtoMessage() {}
+
+func (x *DeleteFileResp) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteFileResp.ProtoReflect.Descriptor instead.
+func (*DeleteFileResp) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{6}
+}
+
+type FileInfoResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Size          uint32                 `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Filename      string                 `protobuf:"bytes,3,opt,name=filename,proto3" json:"filename,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FileInfoResp) Reset() {
+	*x = FileInfoResp{}
+	mi := &file_file_svc_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FileInfoResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FileInfoResp) ProtoMessage() {}
+
+func (x *FileInfoResp) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FileInfoResp.ProtoReflect.Descriptor instead.
+func (*FileInfoResp) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *FileInfoResp) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *FileInfoResp) GetSize() uint32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *FileInfoResp) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+type ListFilesReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListFilesReq) Reset() {
+	*x = ListFilesReq{}
+	mi := &file_file_svc_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListFilesReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListFilesReq) ProtoMessage() {}
+
+func (x *ListFilesReq) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListFilesReq.ProtoReflect.Descriptor instead.
+func (*ListFilesReq) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{8}
+}
+
+type ListFilesResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Total         uint32                 `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	Files         []*FileInfoResp        `protobuf:"bytes,2,rep,name=files,proto3" json:"files,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListFilesResp) Reset() {
+	*x = ListFilesResp{}
+	mi := &file_file_svc_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListFilesResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListFilesResp) ProtoMessage() {}
+
+func (x *ListFilesResp) ProtoReflect() protoreflect.Message {
+	mi := &file_file_svc_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListFilesResp.ProtoReflect.Descriptor instead.
+func (*ListFilesResp) Descriptor() ([]byte, []int) {
+	return file_file_svc_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListFilesResp) GetTotal() uint32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *ListFilesResp) GetFiles() []*FileInfoResp {
+	if x != nil {
+		return x.Files
+	}
+	return nil
+}
+
 var File_file_svc_proto protoreflect.FileDescriptor
 
 const file_file_svc_proto_rawDesc = "" +
@@ -306,15 +490,28 @@ const file_file_svc_proto_rawDesc = "" +
 	"\x05chunk\x18\x02 \x01(\fR\x05chunk\"6\n" +
 	"\x10UploadStreamResp\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04size\x18\x02 \x01(\rR\x04size\"#\n" +
-	"\x11DownloadStreamReq\x12\x0e\n" +
+	"\x04size\x18\x02 \x01(\rR\x04size\"\x19\n" +
+	"\aFileReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\")\n" +
 	"\x11DownloadStreamMsg\x12\x14\n" +
-	"\x05chunk\x18\x01 \x01(\fR\x05chunk2\xfa\x01\n" +
+	"\x05chunk\x18\x01 \x01(\fR\x05chunk\"\x10\n" +
+	"\x0eDeleteFileResp\"N\n" +
+	"\fFileInfoResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\rR\x04size\x12\x1a\n" +
+	"\bfilename\x18\x03 \x01(\tR\bfilename\"\x0e\n" +
+	"\fListFilesReq\"V\n" +
+	"\rListFilesResp\x12\x14\n" +
+	"\x05total\x18\x01 \x01(\rR\x05total\x12/\n" +
+	"\x05files\x18\x02 \x03(\v2\x19.file_svc.v1.FileInfoRespR\x05files2\xb5\x03\n" +
 	"\vFileService\x12H\n" +
 	"\vConstraints\x12\x1b.file_svc.v1.ConstraintsReq\x1a\x1c.file_svc.v1.ConstraintsResp\x12M\n" +
-	"\fUploadStream\x12\x1c.file_svc.v1.UploadStreamMsg\x1a\x1d.file_svc.v1.UploadStreamResp(\x01\x12R\n" +
-	"\x0eDownloadStream\x12\x1e.file_svc.v1.DownloadStreamReq\x1a\x1e.file_svc.v1.DownloadStreamMsg0\x01B0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
+	"\fUploadStream\x12\x1c.file_svc.v1.UploadStreamMsg\x1a\x1d.file_svc.v1.UploadStreamResp(\x01\x12H\n" +
+	"\x0eDownloadStream\x12\x14.file_svc.v1.FileReq\x1a\x1e.file_svc.v1.DownloadStreamMsg0\x01\x12?\n" +
+	"\n" +
+	"DeleteFile\x12\x14.file_svc.v1.FileReq\x1a\x1b.file_svc.v1.DeleteFileResp\x12>\n" +
+	"\vGetFileInfo\x12\x14.file_svc.v1.FileReq\x1a\x19.file_svc.v1.FileInfoResp\x12B\n" +
+	"\tListFiles\x12\x19.file_svc.v1.ListFilesReq\x1a\x1a.file_svc.v1.ListFilesRespB0Z.github.com/vishenosik/file-svc-sdk;file_svc_v1b\x06proto3"
 
 var (
 	file_file_svc_proto_rawDescOnce sync.Once
@@ -328,27 +525,38 @@ func file_file_svc_proto_rawDescGZIP() []byte {
 	return file_file_svc_proto_rawDescData
 }
 
-var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_file_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_file_svc_proto_goTypes = []any{
 	(*ConstraintsReq)(nil),    // 0: file_svc.v1.ConstraintsReq
 	(*ConstraintsResp)(nil),   // 1: file_svc.v1.ConstraintsResp
 	(*UploadStreamMsg)(nil),   // 2: file_svc.v1.UploadStreamMsg
 	(*UploadStreamResp)(nil),  // 3: file_svc.v1.UploadStreamResp
-	(*DownloadStreamReq)(nil), // 4: file_svc.v1.DownloadStreamReq
+	(*FileReq)(nil),           // 4: file_svc.v1.FileReq
 	(*DownloadStreamMsg)(nil), // 5: file_svc.v1.DownloadStreamMsg
+	(*DeleteFileResp)(nil),    // 6: file_svc.v1.DeleteFileResp
+	(*FileInfoResp)(nil),      // 7: file_svc.v1.FileInfoResp
+	(*ListFilesReq)(nil),      // 8: file_svc.v1.ListFilesReq
+	(*ListFilesResp)(nil),     // 9: file_svc.v1.ListFilesResp
 }
 var file_file_svc_proto_depIdxs = []int32{
-	0, // 0: file_svc.v1.FileService.Constraints:input_type -> file_svc.v1.ConstraintsReq
-	2, // 1: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.UploadStreamMsg
-	4, // 2: file_svc.v1.FileService.DownloadStream:input_type -> file_svc.v1.DownloadStreamReq
-	1, // 3: file_svc.v1.FileService.Constraints:output_type -> file_svc.v1.ConstraintsResp
-	3, // 4: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.UploadStreamResp
-	5, // 5: file_svc.v1.FileService.DownloadStream:output_type -> file_svc.v1.DownloadStreamMsg
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	7, // 0: file_svc.v1.ListFilesResp.files:type_name -> file_svc.v1.FileInfoResp
+	0, // 1: file_svc.v1.FileService.Constraints:input_type -> file_svc.v1.ConstraintsReq
+	2, // 2: file_svc.v1.FileService.UploadStream:input_type -> file_svc.v1.UploadStreamMsg
+	4, // 3: file_svc.v1.FileService.DownloadStream:input_type -> file_svc.v1.FileReq
+	4, // 4: file_svc.v1.FileService.DeleteFile:input_type -> file_svc.v1.FileReq
+	4, // 5: file_svc.v1.FileService.GetFileInfo:input_type -> file_svc.v1.FileReq
+	8, // 6: file_svc.v1.FileService.ListFiles:input_type -> file_svc.v1.ListFilesReq
+	1, // 7: file_svc.v1.FileService.Constraints:output_type -> file_svc.v1.ConstraintsResp
+	3, // 8: file_svc.v1.FileService.UploadStream:output_type -> file_svc.v1.UploadStreamResp
+	5, // 9: file_svc.v1.FileService.DownloadStream:output_type -> file_svc.v1.DownloadStreamMsg
+	6, // 10: file_svc.v1.FileService.DeleteFile:output_type -> file_svc.v1.DeleteFileResp
+	7, // 11: file_svc.v1.FileService.GetFileInfo:output_type -> file_svc.v1.FileInfoResp
+	9, // 12: file_svc.v1.FileService.ListFiles:output_type -> file_svc.v1.ListFilesResp
+	7, // [7:13] is the sub-list for method output_type
+	1, // [1:7] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_file_svc_proto_init() }
@@ -362,7 +570,7 @@ func file_file_svc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_file_svc_proto_rawDesc), len(file_file_svc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

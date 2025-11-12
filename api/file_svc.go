@@ -2,6 +2,7 @@ package api
 
 import (
 	"bytes"
+	"context"
 	"io"
 	"log/slog"
 
@@ -69,7 +70,7 @@ func (fsa *FileServiceApi) UploadStream(stream file_svc_v1.FileService_UploadStr
 }
 
 func (fsa *FileServiceApi) DownloadStream(
-	req *file_svc_v1.DownloadStreamReq,
+	req *file_svc_v1.FileReq,
 	stream file_svc_v1.FileService_DownloadStreamServer,
 ) error {
 
@@ -86,7 +87,7 @@ func (fsa *FileServiceApi) DownloadStream(
 
 	fileReader := bytes.NewBuffer(file)
 
-	buf := make([]byte, fsa.svc.GetBatchSize())
+	buf := make([]byte, fsa.settings.GetBatchSize())
 
 	for {
 		num, err := fileReader.Read(buf)
@@ -114,4 +115,20 @@ func (fsa *FileServiceApi) DownloadStream(
 		slog.String("id", id),
 	)
 	return nil
+}
+
+func (fsa *FileServiceApi) Constraints(ctx context.Context, req *file_svc_v1.ConstraintsReq) (*file_svc_v1.ConstraintsResp, error) {
+	return &file_svc_v1.ConstraintsResp{
+		MaxBatchSize: fsa.settings.GetBatchSize(),
+		MaxFileSize:  fsa.settings.GetBatchSize(),
+	}, nil
+}
+
+func (fsa *FileServiceApi) DeleteFile(ctx context.Context, req *file_svc_v1.FileReq) (*file_svc_v1.DeleteFileResp, error) {
+	err := fsa.svc.DeleteFile(req.GetId())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "cannot delete file: %v", err)
+	}
+
+	return &file_svc_v1.DeleteFileResp{}, nil
 }

@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"net/url"
+	"io"
 	"time"
 
 	file_svc_v1 "github.com/vishenosik/file-svc-sdk/gen/grpc/v1/file_svc"
@@ -11,36 +11,19 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-const (
-	defaultTimeout = time.Second * 15
-)
-
-type FileServiceConfig struct {
-	Addr    string
-	Timeout time.Duration
-}
-
-func (config FileServiceConfig) validate() error {
-
-	_, err := url.Parse(config.Addr)
-	if err != nil {
-		return ErrInvalidAddr
-	}
-
-	if config.Timeout <= 0 {
-		config.Timeout = defaultTimeout
-	}
-
-	return nil
+type FileServiceV1 interface {
+	Download(ctx context.Context, id string) (*DownloadResponse, error)
+	Upload(ctx context.Context, file io.Reader, filename string) (*UploadResponse, error)
+	DeleteFile(id string) error
+	FileInfo(id string) (*FileInfo, error)
+	ListFiles() (*FilesList, error)
 }
 
 type FileServiceClient struct {
-	addr        string
-	timeout     time.Duration
-	conn        *grpc.ClientConn
-	client      file_svc_v1.FileServiceClient
-	batchSize   uint32
-	maxFileSize uint32
+	addr    string
+	timeout time.Duration
+	conn    *grpc.ClientConn
+	v1      FileServiceV1
 }
 
 func NewFileServiceClient(config FileServiceConfig) (*FileServiceClient, error) {
@@ -61,13 +44,17 @@ func NewFileServiceClient(config FileServiceConfig) (*FileServiceClient, error) 
 	return cli, nil
 }
 
+func (cli *FileServiceClient) V1() FileServiceV1 {
+	return cli.v1
+}
+
 func (cli *FileServiceClient) Close(_ context.Context) error {
 	return cli.conn.Close()
 }
 
-func (cli *FileServiceClient) connect() error {
+func (cli *FileServiceClient) connect() (err error) {
 
-	conn, err := grpc.NewClient(cli.addr,
+	cli.conn, err = grpc.NewClient(cli.addr,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithConnectParams(grpc.ConnectParams{
 			Backoff: backoff.Config{
@@ -83,18 +70,9 @@ func (cli *FileServiceClient) connect() error {
 		return err
 	}
 
-	cli.conn = conn
-	cli.client = file_svc_v1.NewFileServiceClient(conn)
-
-	return nil
-}
-
-func (cli *FileServiceClient) constraints() error {
-	resp, err := cli.client.Constraints(context.TODO(), &file_svc_v1.ConstraintsReq{})
-	if err != nil {
-		return err
+	cli.v1 = &fileServiceV1{
+		client: file_svc_v1.NewFileServiceClient(cli.conn),
 	}
-	cli.batchSize = resp.GetMaxBatchSize()
-	cli.maxFileSize = resp.GetMaxFileSize()
+
 	return nil
 }

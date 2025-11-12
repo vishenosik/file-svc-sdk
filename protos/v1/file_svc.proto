@@ -1,12 +1,15 @@
 syntax = "proto3";
- 
+
 package file_svc.v1;
 option go_package = "github.com/vishenosik/file-svc-sdk;file_svc_v1";
 
 service FileService {
     rpc Constraints(ConstraintsReq) returns(ConstraintsResp);
     rpc UploadStream(stream UploadStreamMsg) returns(UploadStreamResp);
-    rpc DownloadStream(DownloadStreamReq) returns(stream DownloadStreamMsg);
+    rpc DownloadStream(FileReq) returns(stream DownloadStreamMsg);
+    rpc DeleteFile(FileReq) returns(DeleteFileResp);
+    rpc GetFileInfo(FileReq) returns(FileInfoResp);
+    rpc ListFiles(ListFilesReq) returns(ListFilesResp);
 }
 
 message ConstraintsReq {}
@@ -19,16 +22,31 @@ message ConstraintsResp {
 message UploadStreamMsg {
     bytes chunk = 2;
 }
-  
+
 message UploadStreamResp {
     string id = 1;
     uint32 size = 2;
 }
 
-message DownloadStreamReq {
+message FileReq {
     string id = 1;
 }
 
 message DownloadStreamMsg {
     bytes chunk = 1;
+}
+
+message DeleteFileResp {}
+
+message FileInfoResp {
+    string id = 1;
+    uint32 size = 2;
+    string filename = 3;
+}
+
+message ListFilesReq {}
+
+message ListFilesResp {
+    uint32 total = 1;
+    repeated FileInfoResp files = 2;
 }

@@ -15,21 +15,34 @@ const (
 type FileService interface {
 	Upload(filename string, file []byte) (id string, err error)
 	Download(id string) (file []byte, err error)
+	DeleteFile(id string) error
+}
+
+type Info interface {
+	GetFileInfo(id string) (info *FileInfo, err error)
+	ListFiles() (list *FileInfoList, err error)
+}
+
+type Settings interface {
 	GetBatchSize() uint32
 	GetMaxFileSize() uint32
 }
 
 type FileServiceApi struct {
 	file_svc_v1.UnimplementedFileServiceServer
-	svc FileService
+	svc      FileService
+	settings Settings
+	info     Info
 	// log is a structured logger for the application.
 	log *slog.Logger
 }
 
-func NewFileServiceApi(svc FileService) *FileServiceApi {
+func NewFileServiceApi(svc FileService, info Info, s Settings) *FileServiceApi {
 	return &FileServiceApi{
-		svc: svc,
-		log: logs.SetupLogger().With(appComponent()),
+		svc:      svc,
+		settings: s,
+		info:     info,
+		log:      logs.SetupLogger().With(appComponent()),
 	}
 }
 

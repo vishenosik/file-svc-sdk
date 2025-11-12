@@ -11,12 +11,18 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+type fileServiceV1 struct {
+	client      file_svc_v1.FileServiceClient
+	batchSize   uint32
+	maxFileSize uint32
+}
+
 type UploadResponse struct {
 	ID   string
 	Size uint32
 }
 
-func (cli *FileServiceClient) Upload(
+func (cli *fileServiceV1) Upload(
 	ctx context.Context,
 	file io.Reader,
 	filename string,
@@ -79,12 +85,12 @@ type DownloadResponse struct {
 	File []byte
 }
 
-func (cli *FileServiceClient) Download(
+func (cli *fileServiceV1) Download(
 	ctx context.Context,
 	id string,
 ) (*DownloadResponse, error) {
 
-	stream, err := cli.client.DownloadStream(ctx, &file_svc_v1.DownloadStreamReq{
+	stream, err := cli.client.DownloadStream(ctx, &file_svc_v1.FileReq{
 		Id: id,
 	})
 	if err != nil {
@@ -122,4 +128,72 @@ func (cli *FileServiceClient) Download(
 		Size: fileSize,
 		File: imageData.Bytes(),
 	}, nil
+}
+
+func (cli *fileServiceV1) constraints() error {
+	resp, err := cli.client.Constraints(context.TODO(), &file_svc_v1.ConstraintsReq{})
+	if err != nil {
+		return err
+	}
+	cli.batchSize = resp.GetMaxBatchSize()
+	cli.maxFileSize = resp.GetMaxFileSize()
+	return nil
+}
+
+type FileInfo struct {
+	ID   string `json:"id"`
+	Size uint32 `json:"size"`
+	Name string `json:"name"`
+}
+
+type FilesList struct {
+	Total uint32     `json:"total"`
+	Files []FileInfo `json:"files"`
+}
+
+func (cli *fileServiceV1) ListFiles() (*FilesList, error) {
+	resp, err := cli.client.ListFiles(context.TODO(), &file_svc_v1.ListFilesReq{})
+	if err != nil {
+		return nil, err
+	}
+
+	files := make([]FileInfo, 0, len(resp.GetFiles()))
+	for _, f := range resp.GetFiles() {
+		files = append(files, FileInfo{
+			ID:   f.GetId(),
+			Size: f.GetSize(),
+			Name: f.GetFilename(),
+		})
+	}
+
+	return &FilesList{
+		Total: resp.GetTotal(),
+		Files: files,
+	}, nil
+}
+
+func (cli *fileServiceV1) FileInfo(id string) (*FileInfo, error) {
+	resp, err := cli.client.GetFileInfo(context.TODO(), &file_svc_v1.FileReq{
+		Id: id,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return &FileInfo{
+		ID:   resp.GetId(),
+		Size: resp.GetSize(),
+		Name: resp.GetFilename(),
+	}, nil
+}
+
+func (cli *fileServiceV1) DeleteFile(id string) error {
+	_, err := cli.client.DeleteFile(context.TODO(), &file_svc_v1.FileReq{
+		Id: id,
+	})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
