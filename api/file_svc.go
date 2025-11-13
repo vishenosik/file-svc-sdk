@@ -120,7 +120,7 @@ func (fsa *FileServiceApi) DownloadStream(
 func (fsa *FileServiceApi) Constraints(ctx context.Context, req *file_svc_v1.ConstraintsReq) (*file_svc_v1.ConstraintsResp, error) {
 	return &file_svc_v1.ConstraintsResp{
 		MaxBatchSize: fsa.settings.GetBatchSize(),
-		MaxFileSize:  fsa.settings.GetBatchSize(),
+		MaxFileSize:  fsa.settings.GetMaxFileSize(),
 	}, nil
 }
 
